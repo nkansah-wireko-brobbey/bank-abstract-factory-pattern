@@ -1,5 +1,6 @@
 package bank.domain;
 
+import java.lang.module.ModuleDescriptor.Builder;
 import java.util.*;
 
 
@@ -26,11 +27,11 @@ public class Account {
 		return balance;
 	}
 	public void deposit(double amount){
-		AccountEntry entry = new AccountEntry(new Date(), amount, "deposit", "", "");
+		AccountEntry entry = new AccountEntry.Builder().setDate(new Date()).setAmount(amount).setDescription("deposit").setFromAccountNumber("").setFromPersonName("").build();
 		entryList.add(entry);
 	}
 	public void withdraw(double amount){
-		AccountEntry entry = new AccountEntry(new Date(), -amount, "withdraw", "", "");
+		AccountEntry entry = new AccountEntry.Builder().setDate(new Date()).setAmount(-amount).setDescription("withdraw").setFromAccountNumber("").setFromPersonName("").build();
 		entryList.add(entry);	
 	}
 
@@ -39,8 +40,9 @@ public class Account {
 	}
 
 	public void transferFunds(Account toAccount, double amount, String description){
-		AccountEntry fromEntry = new AccountEntry(new Date(), -amount, description, ""+toAccount.getAccountnumber(), toAccount.getCustomer().getName());
-		AccountEntry toEntry = new AccountEntry(new Date(), amount, description, ""+toAccount.getAccountnumber(), toAccount.getCustomer().getName());
+		AccountEntry fromEntry = new AccountEntry.Builder().setDate(new Date()).setAmount(-amount).setDescription(description).setFromAccountNumber(""+toAccount.getAccountnumber()).setFromPersonName(toAccount.getCustomer().getName()).build();
+		AccountEntry toEntry = new AccountEntry.Builder().setDate(new Date()).setAmount(amount).setDescription(description).setFromAccountNumber(""+toAccount.getAccountnumber()).setFromPersonName(toAccount.getCustomer().getName()).build();
+
 		entryList.add(fromEntry);	
 		toAccount.addEntry(toEntry);
 

@@ -12,13 +12,13 @@ public class AccountEntry {
 	public AccountEntry() {
 	}
 
-	public AccountEntry(Date date, double amount, String description, String fromAccountNumber, String fromPersonName) {
+	public AccountEntry(Builder builder) {
 		super();
-		this.date = date;
-		this.amount = amount;
-		this.description = description;
-		this.fromAccountNumber = fromAccountNumber;
-		this.fromPersonName = fromPersonName;
+		this.date = builder.date;
+		this.amount = builder.amount;
+		this.description = builder.description;
+		this.fromAccountNumber = builder.fromAccountNumber;
+		this.fromPersonName = builder.fromPersonName;
 	}
 
 	public double getAmount() {
@@ -59,6 +59,38 @@ public class AccountEntry {
 
 	public void setFromPersonName(String fromPersonName) {
 		this.fromPersonName = fromPersonName;
+	}
+
+	public static class Builder{
+		private Date date;
+		private double amount;
+		private String description;
+		private String fromAccountNumber;
+		private String fromPersonName;
+		public Builder setDate(Date date) {
+			this.date = date;
+			return this;
+		}
+		public Builder setAmount(double amount) {
+			this.amount = amount;
+			return this;
+		}
+		public Builder setDescription(String description) {
+			this.description = description;
+			return this;
+		}
+		public Builder setFromAccountNumber(String fromAccountNumber) {
+			this.fromAccountNumber = fromAccountNumber;
+			return this;
+		}
+		public Builder setFromPersonName(String fromPersonName) {
+			this.fromPersonName = fromPersonName;
+			return this;
+		}
+
+		public AccountEntry build(){
+			return new AccountEntry(this);
+		}
 	}
 	
 }
