@@ -14,7 +14,7 @@ public class ProductionBankFactory implements BankFactory {
 
     @Override
     public IEmailSender getEmailSender() {
-        return new EmailSenderImpl();
+        return EmailSenderImpl.getInstance();
     }
     
 }

@@ -2,6 +2,7 @@ package bank.service;
 
 import java.util.Collection;
 
+import bank.dao.AccountDAOLogger;
 import bank.dao.IAccountDAO;
 import bank.domain.Account;
 import bank.domain.Customer;
@@ -14,7 +15,7 @@ public class AccountService implements IAccountService {
 
 	
 	public AccountService(IAccountDAO accountDAO, IEmailSender emailSender){
-		this.accountDAO= accountDAO;
+		this.accountDAO= new AccountDAOLogger(accountDAO);
 		this.emailSender= emailSender;
 	}
 
